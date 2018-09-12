@@ -4,13 +4,13 @@ XRegExp.install("namespacing");
 const validation = require("./utils/validation");
 
 // Couriers
-const amazon = require("../data/couriers/amazon.json");
-const dhl = require("../data/couriers/dhl.json");
-const fedex = require("../data/couriers/fedex.json");
-const ontrac = require("../data/couriers/ontrac.json");
-const s10 = require("../data/couriers/s10.json");
-const ups = require("../data/couriers/ups.json");
-const usps = require("../data/couriers/usps.json");
+const amazon = require("tracking_number_data/couriers/amazon.json");
+const dhl = require("tracking_number_data/couriers/dhl.json");
+const fedex = require("tracking_number_data/couriers/fedex.json");
+const ontrac = require("tracking_number_data/couriers/ontrac.json");
+const s10 = require("tracking_number_data/couriers/s10.json");
+const ups = require("tracking_number_data/couriers/ups.json");
+const usps = require("tracking_number_data/couriers/usps.json");
 
 const couriers = [amazon, dhl, fedex, ontrac, s10, ups, usps];
 
