@@ -31,7 +31,7 @@ const t = new TrackingNumber("RB123456785GB");
 console.log(t.courierName); // "Royal Mail Group plc"
 console.log(t.courierCode); // "s10"
 
-const t = new TrackingNumber("RB123456785US");
+const t = new TrackingNumber("1001901781990001000300617767839437");
 console.log(t.courierName); // "United States Postal Service"
 ```
 
