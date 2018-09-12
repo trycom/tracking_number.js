@@ -1,0 +1,19 @@
+{
+  "name": "tracking_number.js",
+  "version": "1.0.0",
+  "description": "Tracking number validation and more",
+  "main": "src/index.js",
+  "repository": "https://github.com/trycom/tracking_number.js.git",
+  "author": "Eric Lewis <ericlewis777@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "ava",
+    "test:watch": "ava --watch"
+  },
+  "devDependencies": {
+    "ava": "1.0.0-beta.8"
+  },
+  "dependencies": {
+    "xregexp": "^4.2.0"
+  }
+}
