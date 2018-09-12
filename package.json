@@ -1,5 +1,5 @@
 {
-  "name": "tracking_number.js",
+  "name": "tracking_number",
   "version": "1.0.0",
   "description": "Tracking number validation and more",
   "main": "src/index.js",
