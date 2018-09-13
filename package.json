@@ -11,8 +11,10 @@
   "author": "Eric Lewis <ericlewis777@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "nyc ava",
-    "test:watch": "ava --watch"
+    "test": "ava",
+    "test:watch": "ava --watch",
+    "test:coverage": "nyc ava",
+    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
   },
   "devDependencies": {
     "ava": "1.0.0-beta.8",
