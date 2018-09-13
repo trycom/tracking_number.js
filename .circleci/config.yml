@@ -12,7 +12,9 @@ jobs:
 
     steps:
       # Setup codecov env
-      - run: bash <(curl -s https://codecov.io/env)
+      - run:
+          name: Setup codecov env
+          command: bash <(curl -s https://codecov.io/env)
 
       - checkout
 
@@ -38,7 +40,7 @@ jobs:
       # Generate coverage
       - run:
           name: Generate code coverage
-          command: "./node_modules/.bin/nyc report --reporter=text-lcov > coverage.lcov && codecov"
+          command: "./node_modules/.bin/nyc report --reporter=text-lcov > coverage.lcov"
 
       # Report coverage
       - run:
