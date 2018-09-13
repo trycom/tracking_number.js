@@ -1,4 +1,4 @@
-# tracking_number.js
+# tracking_number.js [![CircleCI](https://circleci.com/gh/trycom/tracking_number.js/tree/master.svg?style=svg)](https://circleci.com/gh/trycom/tracking_number.js/tree/master)
 
 This lib identifies valid tracking numbers and can tell you a little bit about the shipment just from the number.
 
