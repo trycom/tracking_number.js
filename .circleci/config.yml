@@ -7,11 +7,13 @@ jobs:
   build:
     docker:
       - image: circleci/node:8.9.4
-      - run: bash <(curl -s https://codecov.io/env
 
     working_directory: ~/repo
 
     steps:
+      # Setup codecov env
+      - run: bash <(curl -s https://codecov.io/env
+
       - checkout
 
       # Download and cache dependencies
@@ -32,6 +34,11 @@ jobs:
       - run:
           name: Test
           command: yarn test
+
+      # Generate coverage
+      - run:
+          name: Generate code coverage
+          command: "./node_modules/.bin/nyc report --reporter=text-lcov > coverage.lcov && codecov"
 
       # Report coverage
       - run:
