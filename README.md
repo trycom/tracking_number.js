@@ -7,7 +7,7 @@ It detects tracking numbers from UPS, FedEx, DHL, USPS, OnTrac, Amazon Logistics
 Wraps JSON data from [a shared
 repository](https://github.com/jkeen/tracking_number_data). It is
 based off by jkeen's [Ruby
-library](https://github.com/jkeen/tracking_number_data).
+library](https://github.com/jkeen/tracking_number).
 
 ## Usage
 
