@@ -11,11 +11,6 @@ jobs:
     working_directory: ~/repo
 
     steps:
-      # Setup codecov env
-      - run:
-          name: Setup codecov env
-          command: bash <(curl -s https://codecov.io/env)
-
       - checkout
 
       # Download and cache dependencies
@@ -36,18 +31,3 @@ jobs:
       - run:
           name: Test
           command: yarn test
-
-      - run:
-          name: Generate code coverage
-          command: "./node_modules/.bin/nyc report --reporter=text-lcov"
-      - store_artifacts:
-          path: test-results.xml
-          prefix: tests
-      - store_artifacts:
-          path: coverage
-          prefix: coverage
-
-      # Report coverage
-      - run:
-          name: Generate code coverage
-          command: bash <(curl -s https://codecov.io/bash)
