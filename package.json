@@ -13,8 +13,7 @@
   "scripts": {
     "test": "ava",
     "test:watch": "ava --watch",
-    "test:coverage": "nyc ava",
-    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
+    "test:coverage": "nyc ava"
   },
   "devDependencies": {
     "ava": "1.0.0-beta.8",

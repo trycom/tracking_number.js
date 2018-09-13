@@ -4,7 +4,7 @@
 #
 version: 2
 jobs:
-  build:
+  test:
     docker:
       - image: circleci/node:8.9.4
 
@@ -13,7 +13,7 @@ jobs:
     steps:
       - checkout
 
-      # Install Code Coverage
+      # Install codecov upload tool
       - run: yarn global add codecov
 
       # Download and cache dependencies
@@ -30,8 +30,12 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      # run tests!
-      - run: yarn test
+      # Run tests!
+      - run:
+          name: Test
+          command: yarn test
 
-      # report coverage
-      - run: yarn report-coverage
+      # Report coverage
+      - run:
+          name: Generate code coverage
+          command: "./node_modules/.bin/nyc report --reporter=text-lcov > coverage.lcov && codecov"
