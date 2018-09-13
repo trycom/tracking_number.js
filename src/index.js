@@ -15,7 +15,7 @@ const usps = require("tracking_number_data/couriers/usps.json");
 const couriers = [amazon, dhl, fedex, ontrac, s10, ups, usps];
 
 const TrackingNumber = (function() {
-  let privateProps = new WeakMap();
+  const privateProps = new WeakMap();
 
   class TrackingNumber {
     constructor(trackingNumber = this.throwIfMissingTrackingNumber()) {
@@ -128,7 +128,16 @@ const TrackingNumber = (function() {
         matchingAdditional: { Courier }
       } = privateProps.get(this);
 
-      const returnObj = { name, courierCode: courier_code, ...Courier };
+      const returnObj = {
+        name: Courier ? Courier.courier : name,
+        courierCode: courier_code,
+        ...Courier
+      };
+
+      if (Courier) {
+        delete returnObj.courier;
+      }
+
       delete returnObj.tracking_numbers;
       delete returnObj.matches;
       delete returnObj.matches_regex;
@@ -173,7 +182,6 @@ const TrackingNumber = (function() {
 
     get courierCode() {
       const { courier } = privateProps.get(this);
-
       return courier.courier_code;
     }
 
@@ -210,13 +218,13 @@ const TrackingNumber = (function() {
         matchingAdditional: { Courier }
       } = privateProps.get(this);
 
-      let url = validation.tracking_url;
+      const url = validation.tracking_url;
 
-      if (Courier) {
-        url = Courier.tracking_url;
+      if (url) {
+        return url.replace("%s", this.trackingNumber);
       }
 
-      return url.replace("%s", this.trackingNumber);
+      return undefined;
     }
 
     get packageType() {
