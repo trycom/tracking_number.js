@@ -4,6 +4,11 @@ This lib identifies valid tracking numbers and can tell you a little bit about t
 
 It detects tracking numbers from UPS, FedEx, DHL, USPS, OnTrac, Amazon Logistics, and 160+ countries national postal services (S10 standard).
 
+Wraps JSON data from [a shared
+repository](https://github.com/jkeen/tracking_number_data). It is
+based off by jkeen's [Ruby
+library](https://github.com/jkeen/tracking_number_data).
+
 ## Usage
 
 #### Checking an individual tracking number
