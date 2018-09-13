@@ -4,6 +4,10 @@
   "description": "Tracking number validation and more",
   "main": "src/index.js",
   "repository": "https://github.com/trycom/tracking_number.js.git",
+  "bugs": {
+    "url": "https://github.com/trycom/tracking_number.js/issues"
+  },
+  "homepage": "https://github.com/trycom/tracking_number.js#readme",
   "author": "Eric Lewis <ericlewis777@gmail.com>",
   "license": "MIT",
   "scripts": {
@@ -15,7 +19,7 @@
     "nyc": "^13.0.1"
   },
   "dependencies": {
-    "tracking_number_data": "https://github.com/jkeen/tracking_number_data",
+    "tracking_number_data": "https://github.com/trycom/tracking_number_data",
     "xregexp": "^4.2.0"
   }
 }
