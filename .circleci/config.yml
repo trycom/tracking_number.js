@@ -7,14 +7,12 @@ jobs:
   build:
     docker:
       - image: circleci/node:8.9.4
+      - run: bash <(curl -s https://codecov.io/env
 
     working_directory: ~/repo
 
     steps:
       - checkout
-
-      # Install codecov upload tool
-      - run: yarn global add codecov
 
       # Download and cache dependencies
       - restore_cache:
@@ -38,4 +36,4 @@ jobs:
       # Report coverage
       - run:
           name: Generate code coverage
-          command: "./node_modules/.bin/nyc report --reporter=text-lcov > coverage.lcov && codecov"
+          command: bash <(curl -s https://codecov.io/bash)
