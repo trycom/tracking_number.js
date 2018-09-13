@@ -13,6 +13,9 @@ jobs:
     steps:
       - checkout
 
+      # Install Code Coverage
+      - run: yarn global add codecov
+
       # Download and cache dependencies
       - restore_cache:
           keys:
