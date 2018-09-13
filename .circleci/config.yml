@@ -12,7 +12,7 @@ jobs:
 
     steps:
       # Setup codecov env
-      - run: bash <(curl -s https://codecov.io/env
+      - run: bash <(curl -s https://codecov.io/env)
 
       - checkout
 
