@@ -13,11 +13,6 @@ jobs:
     steps:
       - checkout
 
-      # Install codecov
-      - run:
-          name: Install codecov
-          command: yarn global add codecov
-
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -40,7 +35,12 @@ jobs:
           name: Test
           command: yarn test:coverage
 
+      # Install codecov
+      - run:
+          name: Install codecov
+          command: yarn add --dev codecov
+
       # Report coverage
       - run:
           name: Report code coverage
-          command: "./node_modules/.bin/nyc report --reporter=text-lcov > coverage.lcov && codecov"
+          command: "./node_modules/.bin/nyc report --reporter=text-lcov > coverage.lcov && ./node_modules/.bin/codecov"
