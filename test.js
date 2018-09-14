@@ -1,5 +1,6 @@
 import test from "ava";
 import TrackingNumber from "./src";
+const validation = require("./src/utils/validation");
 
 // a tracking number
 test("throws error when no provided tracking number", t => {
@@ -239,74 +240,6 @@ test("USPS 20: have valid decode", t => {
   });
 });
 
-// tracking number fedex
-const fedexTrackingNumber = "000123450000000027";
-
-test("FedEx: report correct courier name", t => {
-  const { courierName } = new TrackingNumber(fedexTrackingNumber);
-  t.is(courierName, "FedEx");
-});
-
-test("FedEx: report correct courier code", t => {
-  const { courierCode } = new TrackingNumber(fedexTrackingNumber);
-  t.is(courierCode, "fedex");
-});
-
-test("FedEx: report correct service", t => {
-  const { serviceType } = new TrackingNumber(fedexTrackingNumber);
-  t.falsy(serviceType);
-});
-
-test("FedEx: report correct missing service description", t => {
-  const { serviceDescription } = new TrackingNumber(fedexTrackingNumber);
-  t.falsy(serviceDescription);
-});
-
-test("FedEx: report correct no shipperId", t => {
-  const { shipperId } = new TrackingNumber(fedexTrackingNumber);
-  t.falsy(shipperId);
-});
-
-test("FedEx: report correct no destination", t => {
-  const { destinationZip } = new TrackingNumber(fedexTrackingNumber);
-  t.falsy(destinationZip);
-});
-
-test("FedEx: report correct package type", t => {
-  const { packageType } = new TrackingNumber(fedexTrackingNumber);
-  t.is(packageType, "case/carton");
-});
-
-test("FedEx: have valid tracking url", t => {
-  const { trackingUrl, trackingNumber } = new TrackingNumber(
-    fedexTrackingNumber
-  );
-  t.truthy(trackingUrl);
-  t.true(trackingUrl.includes(trackingNumber));
-});
-
-test("FedEx: have valid info", t => {
-  const { info, trackingUrl } = new TrackingNumber(fedexTrackingNumber);
-  t.deepEqual(info, {
-    courier: { name: "FedEx", courierCode: "fedex" },
-    shipperId: undefined,
-    trackingUrl,
-    destinationZip: undefined,
-    packageType: "case/carton",
-    serviceDescription: undefined,
-    serviceType: undefined
-  });
-});
-
-test("FedEx: have valid decode", t => {
-  const { decode } = new TrackingNumber(fedexTrackingNumber);
-  t.deepEqual(decode, {
-    CheckDigit: "7",
-    SerialNumber: "012345000000002",
-    ShippingContainerType: "00"
-  });
-});
-
 // tracking number additional data for USPS 34v2
 const usps34v2TrackingNumber = "4201002334249200190132607600833457";
 
@@ -386,4 +319,101 @@ test("USPS 34v2: have valid decode", t => {
     SerialNumber: "920019013260760083345",
     ShipperId: "00190132"
   });
+});
+
+// tracking number fedex
+const fedexTrackingNumber = "000123450000000027";
+
+test("FedEx: report correct courier name", t => {
+  const { courierName } = new TrackingNumber(fedexTrackingNumber);
+  t.is(courierName, "FedEx");
+});
+
+test("FedEx: report correct courier code", t => {
+  const { courierCode } = new TrackingNumber(fedexTrackingNumber);
+  t.is(courierCode, "fedex");
+});
+
+test("FedEx: report correct service", t => {
+  const { serviceType } = new TrackingNumber(fedexTrackingNumber);
+  t.falsy(serviceType);
+});
+
+test("FedEx: report correct missing service description", t => {
+  const { serviceDescription } = new TrackingNumber(fedexTrackingNumber);
+  t.falsy(serviceDescription);
+});
+
+test("FedEx: report correct no shipperId", t => {
+  const { shipperId } = new TrackingNumber(fedexTrackingNumber);
+  t.falsy(shipperId);
+});
+
+test("FedEx: report correct no destination", t => {
+  const { destinationZip } = new TrackingNumber(fedexTrackingNumber);
+  t.falsy(destinationZip);
+});
+
+test("FedEx: report correct package type", t => {
+  const { packageType } = new TrackingNumber(fedexTrackingNumber);
+  t.is(packageType, "case/carton");
+});
+
+test("FedEx: have valid tracking url", t => {
+  const { trackingUrl, trackingNumber } = new TrackingNumber(
+    fedexTrackingNumber
+  );
+  t.truthy(trackingUrl);
+  t.true(trackingUrl.includes(trackingNumber));
+});
+
+test("FedEx: have valid info", t => {
+  const { info, trackingUrl } = new TrackingNumber(fedexTrackingNumber);
+  t.deepEqual(info, {
+    courier: { name: "FedEx", courierCode: "fedex" },
+    shipperId: undefined,
+    trackingUrl,
+    destinationZip: undefined,
+    packageType: "case/carton",
+    serviceDescription: undefined,
+    serviceType: undefined
+  });
+});
+
+test("FedEx: have valid decode", t => {
+  const { decode } = new TrackingNumber(fedexTrackingNumber);
+  t.deepEqual(decode, {
+    CheckDigit: "7",
+    SerialNumber: "012345000000002",
+    ShippingContainerType: "00"
+  });
+});
+
+// checksum tests
+test("S10: checksum 0", t => {
+  const s10TrackingSequence = "29492510";
+  const checkDigit = 0;
+  const answer = validation.s10(s10TrackingSequence, checkDigit);
+  t.true(answer)
+});
+
+test("S10: fail checksum 0", t => {
+  const s10TrackingSequence = "29492510";
+  const checkDigit = 999;
+  const answer = validation.s10(s10TrackingSequence, checkDigit);
+  t.false(answer)
+});
+
+test("S10: checksum 5", t => {
+  const s10TrackingSequence = "89006891";
+  const checkDigit = 5;
+  const answer = validation.s10(s10TrackingSequence, checkDigit);
+  t.true(answer)
+});
+
+test("S10: fail checksum 5", t => {
+  const s10TrackingSequence = "89006891";
+  const checkDigit = 999;
+  const answer = validation.s10(s10TrackingSequence, checkDigit);
+  t.false(answer)
 });

@@ -22,7 +22,7 @@ module.exports = {
   mod7: (sequence, checkDigit) => {
     return sequence % 7 === Number.parseInt(checkDigit);
   },
-  s10: (sequence, checkDigit, extras = {}) => {
+  s10: (sequence, checkDigit) => {
     const total = sequence
       .split("")
       .map((c, i) => {
